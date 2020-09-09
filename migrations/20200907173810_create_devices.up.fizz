@@ -5,8 +5,8 @@ create_table("devices") {
 	t.Column("model", "string", {})
 	t.Column("storage", "string", {})
 	t.Column("cost", "decimal", {})
-	t.Column("operating_system", "varchar[]", {})
-	t.Column("image", "string", {})
+	t.Column("operating_system", "string", {})
+	t.Column("image", "text", {})
 	t.Column("is_new", "bool", {})
 	t.Timestamps()
 }

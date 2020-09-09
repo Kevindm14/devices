@@ -31,8 +31,8 @@ CREATE TABLE public.devices (
     model character varying(255) NOT NULL,
     storage character varying(255) NOT NULL,
     cost numeric NOT NULL,
-    operating_system character varying[] NOT NULL,
-    image character varying(255) NOT NULL,
+    operating_system character varying(255) NOT NULL,
+    image text NOT NULL,
     is_new boolean NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL

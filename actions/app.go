@@ -55,9 +55,10 @@ func App() *buffalo.App {
 		// Remove to disable this.
 		app.Use(popmw.Transaction(models.DB))
 
-		app.GET("/", HomeHandler)
-		app.GET("/newDevice", newDeviceHandler)
-
+		app.GET("/", DevicesIndex)
+		app.GET("/devices", DevicesIndex)
+		app.GET("/devices/new", DevicesNew)
+		app.POST("/devices", DevicesCreate)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
