@@ -4,25 +4,36 @@
   </div>
 </div>
 
-<div class="my-3">
+<div class="my-3 container">
   <%= partial("devices/flash.html") %>
 </div>
 
-<div class="bg-light">
-  <table class="table border rounded bg-white">
-    <thead>
+<div class="container">
+  <table class="table border rounded bg-white text-center">
+    <thead> 
       <tr>
         <th>Device Names</th>
         <th>Device Type</th>
         <th>Cost</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <%= for (index, device) in devices { %>
+      <%= for (device) in devices { %>
       <tr>
-          <td><%= device.Manufacture %></td>
+          <td><a href="<%= devicePath({device_id: device.ID}) %>" class="text-muted"><%= device.Make %> <%= device.Model %></a></td>
           <td><%= device.OperatingSystem %></td>
           <td>$<%= device.Cost %></td>
+          <td>
+            <div class="dropdown">
+              <button class="btn border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ...
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="<%= devexPath({ device_id: device.ID }) %>" data-method="DELETE" data-confirm="Are you sure?">Delete</a>
+              </div>
+            </div>
+          </td>
       </tr>
       <% } %>
     </tbody>

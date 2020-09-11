@@ -2,6 +2,8 @@ package models
 
 import (
 	"encoding/json"
+	"fmt"
+	"strings"
 	"time"
 
 	"github.com/gobuffalo/pop/v5"
@@ -18,11 +20,23 @@ type Device struct {
 	Model           string    `json:"model" db:"model"`
 	Storage         string    `json:"storage" db:"storage"`
 	Cost            float64   `json:"cost" db:"cost"`
+	Color           string    `json:"color" db:"color"`
 	OperatingSystem string    `json:"operating_system" db:"operating_system"`
 	Image           string    `json:"image" db:"image"`
 	IsNew           bool      `json:"is_new" db:"is_new"`
 	CreatedAt       time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt       time.Time `json:"updated_at" db:"updated_at"`
+}
+
+type PresenceValidator struct {
+	Field string
+	Cost  float64
+}
+
+func (v *PresenceValidator) IsValid(errors *validate.Errors) {
+	if v.Cost == 0 {
+		errors.Add(strings.ToLower(v.Field), fmt.Sprintf("%s must not be blank!", v.Field))
+	}
 }
 
 // String is not required by pop and may be deleted
@@ -49,6 +63,7 @@ func (d *Device) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: d.Make, Name: "Make"},
 		&validators.StringIsPresent{Field: d.Model, Name: "Model"},
 		&validators.StringIsPresent{Field: d.Storage, Name: "Storage"},
+		&PresenceValidator{"Cost", d.Cost},
 	), nil
 }
 
