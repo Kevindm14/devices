@@ -32,3 +32,28 @@ name = "lots of devices"
       created_at = "<%= now() %>"
       updated_at = "<%= now() %>"
 
+[[scenario]]
+name = "lots of users"
+
+  [[scenario.table]]
+    name = "users"
+
+    [[scenario.table.row]]
+      id = "<%= uuidNamed("user") %>"
+      first_name = "kevin"
+      last_name = "diaz"
+      email = "example@gmail.com"
+      role = "RegularUser"
+      manager_email = "admin@admin.com"
+      created_at = "<%= now() %>"
+      updated_at = "<%= now() %>"
+
+    [[scenario.table.row]]
+      id = "<%= uuid() %>"
+      first_name = "kevin"
+      last_name = "diaz"
+      email = "example@gmail.com"
+      role = "manager"
+      manager_email = "No"
+      created_at = "<%= now() %>"
+      updated_at = "<%= now() %>"

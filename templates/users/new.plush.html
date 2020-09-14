@@ -1,0 +1,6 @@
+<div class="py-4 container">
+    <h1>Add User</h1>
+    <%= form_for(user, {action: usersPath(), method: "POST"}) { %>
+    <%= partial("users/form.html") %>
+    <% } %>
+</div>

@@ -1,11 +1,12 @@
 <div class="bg-white">
-  <div class="d-flex container justify-content-end py-4">
+  <div class="d-flex container justify-content-between align-items-center py-4">
+    <%= partial("links.html") %>
     <a href="<%= newDevicesPath() %>" class="btn btn-info">Add devices</a>
   </div>
 </div>
 
 <div class="my-3 container">
-  <%= partial("devices/flash.html") %>
+  <%= partial("flash.html") %>
 </div>
 
 <div class="container">

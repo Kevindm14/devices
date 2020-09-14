@@ -1,0 +1,42 @@
+<div class="bg-white">
+    <div class="d-flex container justify-content-between align-items-center py-4">
+      <%= partial("links.html") %>
+      <a href="<%= newUsersPath() %>" class="btn btn-info">Add User</a>
+    </div>
+</div>
+
+<div class="my-3 container">
+    <%= partial("flash.html") %>
+</div>
+
+<div class="container">
+    <table class="table border rounded bg-white text-center">
+      <thead> 
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for (user) in users { %>
+        <tr>
+            <td><a href="<%= userPath({ user_id: user.ID }) %>" class="text-muted"><%= user.FirstName %> <%= user.LastName %></a></td>
+            <td><%= user.Email %></td>
+            <td><%= user.Role %></td>
+            <td>
+              <div class="dropdown">
+                <button class="btn border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ...
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="<%= userPath({ user_id: user.ID }) %>" data-method="DELETE" data-confirm="Are you sure?">Delete</a>
+                </div>
+              </div>
+            </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
