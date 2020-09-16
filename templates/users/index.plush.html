@@ -1,42 +1,48 @@
 <div class="bg-white">
-    <div class="d-flex container justify-content-between align-items-center py-4">
-      <%= partial("links.html") %>
-      <a href="<%= newUsersPath() %>" class="btn btn-info">Add User</a>
-    </div>
+  <div class="d-flex container justify-content-between align-items-center py-4">
+    <%= partial("links.html") %>
+    <a href="<%= newUsersPath() %>" class="btn btn-info px-4 py-2">Add User</a>
+  </div>
 </div>
 
-<div class="my-3 container">
-    <%= partial("flash.html") %>
-</div>
-
-<div class="container">
-    <table class="table border rounded bg-white text-center">
-      <thead> 
+<div class="bg-light">
+  <%= partial("flash.html") %>
+  <div class="container py-5">
+    <p class="text-muted">
+      <b class="h3"><%= len(users) %></b> Users
+    </p>
+    <table class="table border rounded bg-white">
+      <thead class="text-muted">
         <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
+          <th>Name <i class="fas fa-sort"></i></th>
+          <th>Email <i class="fas fa-sort"></i></th>
+          <th>Role <i class="fas fa-sort"></i></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <%= for (user) in users { %>
         <tr>
-            <td><a href="<%= userPath({ user_id: user.ID }) %>" class="text-muted"><%= user.FirstName %> <%= user.LastName %></a></td>
-            <td><%= user.Email %></td>
-            <td><%= user.Role %></td>
-            <td>
-              <div class="dropdown">
-                <button class="btn border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  ...
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="<%= userPath({ user_id: user.ID }) %>" data-method="DELETE" data-confirm="Are you sure?">Delete</a>
-                </div>
+          <td class="title-device"><%= user.FirstName %> <%= user.LastName %></td>
+          <td class="td-info"><%= user.Email %></td>
+          <td class="td-info"><%= user.Role %></td>
+          <td>
+            <div class="dropdown">
+              <button class="btn border" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-h text-muted"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item btn-dropwdown" href="<%= userPath({ user_id: user.ID }) %>">View</a>
+                <a class="dropdown-item btn-dropwdown" href="<%= editUserPath({ user_id: user.ID }) %>">Edit</a>
+                <a class="dropdown-item btn-delete" href="<%= userPath({ user_id: user.ID }) %>" data-method="DELETE"
+                  data-confirm="Are you sure?">Delete</a>
               </div>
-            </td>
+            </div>
+          </td>
         </tr>
         <% } %>
       </tbody>
     </table>
   </div>
+</div>

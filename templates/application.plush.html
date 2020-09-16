@@ -10,24 +10,20 @@
     <link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
   </head>
   <body>
-
     <div class="bg-dark">
       <header>
-        <div class="container navbar-dark p-3">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h1 class="navbar-brand">Administration</h1>
-            </div>
-            <div>
-              <button class="rounded p-1"><i class="fas fa-car-side"></i></button>
-              <button class="rounded p-1"><i class="fas fa-sign-out-alt"></i></button>
+        <div class="container navbar-dark py-1">
+          <div class="d-flex align-items-center">
+            <div class="my-2">
+              <img src="<%= assetPath("images/logo.png") %>" alt="logo" class="logo">
+              <h1 class="navbar-brand title-nav">ADMINISTRATION</h1>
             </div>
           </div>
         </div>
       </header>
     </div>
 
-    <div class="bg-light h-100">
+    <div class="bg-white">
       <%= yield %>
     </div>
 

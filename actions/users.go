@@ -1,8 +1,8 @@
 package actions
 
 import (
-    "net/http"
 	"devices/models"
+	"net/http"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop/v5"
@@ -74,6 +74,46 @@ func UsersDetail(c buffalo.Context) error {
 	return c.Render(200, r.HTML("users/show"))
 }
 
+func UsersEdit(c buffalo.Context) error {
+	tx := c.Value("tx").(*pop.Connection)
+	user := &models.User{}
+
+	if err := tx.Find(user, c.Param("user_id")); err != nil {
+		return c.Error(404, err)
+	}
+
+	c.Set("user", user)
+	return c.Render(http.StatusOK, r.HTML("users/edit.plush.html"))
+}
+
+func UsersUpdate(c buffalo.Context) error {
+	tx := c.Value("tx").(*pop.Connection)
+	user := &models.User{}
+
+	if err := tx.Find(user, c.Param("user_id")); err != nil {
+		return c.Error(404, err)
+	}
+
+	if err := c.Bind(user); err != nil {
+		return err
+	}
+
+	verrs, err := tx.ValidateAndUpdate(user)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+
+	if verrs.HasAny() {
+		c.Set("user", user)
+		c.Set("errors", verrs)
+		return c.Render(422, r.HTML("users/edit.plush.html"))
+	}
+
+	// If there are no errors set a success message
+	c.Flash().Add("success", "User was updated successfully")
+	return c.Redirect(302, "/users/%s", user.ID)
+}
+
 func UsersDestroy(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	user := &models.User{}
@@ -86,8 +126,7 @@ func UsersDestroy(c buffalo.Context) error {
 		return err
 	}
 
-	c.Flash().Add("success", "user was destroyed successfully")
+	c.Flash().Add("success", "User was destroyed successfully")
 	// Redirect to the devices page
 	return c.Redirect(302, "/users")
 }
-

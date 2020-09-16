@@ -58,13 +58,18 @@ func App() *buffalo.App {
 		app.GET("/", DevicesIndex)
 		app.GET("/devices", DevicesIndex)
 		app.GET("/devices/new", DevicesNew)
-		app.POST("/devices", DevicesCreate)
+		app.GET("/devices/{device_id}/edit", DevicesEdit)
 		app.GET("/devices/{device_id}", DevicesDetail).Name("devicePath")
+		app.POST("/devices", DevicesCreate)
+		app.PUT("/devices/{device_id}", DevicesUpdate)
 		app.DELETE("/devices/{device_id}", DevicesDestroy)
+
 		app.GET("/users", UsersIndex)
 		app.GET("/users/new", UsersNew)
+		app.GET("/users/{user_id}/edit", UsersEdit)
 		app.POST("/users", UsersCreate)
 		app.GET("/users/{user_id}", UsersDetail)
+		app.PUT("/users/{user_id}", UsersUpdate)
 		app.DELETE("/users/{user_id}", UsersDestroy)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory

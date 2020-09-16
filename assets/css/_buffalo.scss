@@ -1,13 +1,40 @@
+body, html {
+  height: 100%;
+}
+
 header {
-  background-color: #62a5ee;
-  padding: 10px 20px;
+  background-color: rgb(0, 174, 241);
   box-sizing: border-box;
+}
+
+.logo {
+  border-right: 1px solid white;
+  margin-right: 10px;
+}
+
+.title-nav {
+  color: rgba(245, 245, 245, 0.637) !important;
+  font-size: medium;
 }
 
 ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+.item a {
+  margin: 0 5px;
+  padding: 10px;
+  border-radius: 10px;
+  color: rgb(83, 82, 82);
+  font-weight: 300;
+  text-decoration: none;
+}
+
+.item a:hover {
+  background: rgba(212, 240, 252, 0.925);
+  color: rgb(13, 59, 102);
 }
 
 .title-detail {
@@ -21,3 +48,80 @@ ul {
 .label-user {
   font-size: 20px;
 }
+
+.form-control {
+  border-radius: 0;
+}
+
+.btn-info {
+  background: rgb(0, 172, 243);
+  border: none;
+}
+
+.btn-info:hover {
+  background: rgb(1, 129, 184);
+}
+
+.btn-devices {
+  padding: 20px 163px;
+}
+
+/* TABLE */
+
+table {
+  font-size: 16px;
+}
+
+.fa-sort {
+  color: rgb(150, 147, 147);
+}
+
+th {
+  color: rgb(83, 82, 82);
+  font-weight: 300;
+}
+
+.td-table {
+  width: 140px;
+}
+
+.td-info {
+  color: rgb(105, 104, 104);
+}
+
+table th:first-child, table td:first-child { 
+  padding-left: 3rem; 
+}
+table th:last-child, table td:last-child { 
+  padding-right: 3rem; 
+}
+
+table th:last-child, table td:last-child { 
+  width: 100px;
+}
+
+.dropdown-menu {
+  border-radius: 10px;
+}
+
+.btn-dropwdown {
+  color: rgb(105, 104, 104);
+}
+
+.btn-more {
+  width: 60px;
+}
+
+table th {
+  height: 60px;
+}
+
+.btn-delete {
+  color: red;
+}
+
+.title-device {
+  color: rgb(0, 174, 241);
+}
+
+/*****************/

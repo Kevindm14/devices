@@ -47,7 +47,7 @@ func DevicesCreate(c buffalo.Context) error {
 	if verrs.HasAny() {
 		c.Set("device", device)
 		c.Set("errors", verrs)
-		return c.Render(422, r.HTML("devices/newDevice.plush.html"))
+		return c.Render(422, r.HTML("devices/new.plush.html"))
 	}
 
 	// If there are no errors set a success message
@@ -58,7 +58,7 @@ func DevicesCreate(c buffalo.Context) error {
 
 func DevicesNew(c buffalo.Context) error {
 	c.Set("device", models.Device{})
-	return c.Render(http.StatusOK, r.HTML("devices/newDevice.html"))
+	return c.Render(http.StatusOK, r.HTML("devices/new.plush.html"))
 }
 
 func DevicesDetail(c buffalo.Context) error {
@@ -78,6 +78,46 @@ func DevicesDetail(c buffalo.Context) error {
 
 	c.Set("device", device)
 	return c.Render(200, r.HTML("devices/show"))
+}
+
+func DevicesEdit(c buffalo.Context) error {
+	tx := c.Value("tx").(*pop.Connection)
+	device := &models.Device{}
+
+	if err := tx.Find(device, c.Param("device_id")); err != nil {
+		return c.Error(404, err)
+	}
+
+	c.Set("device", device)
+	return c.Render(http.StatusOK, r.HTML("devices/edit.plush.html"))
+}
+
+func DevicesUpdate(c buffalo.Context) error {
+	tx := c.Value("tx").(*pop.Connection)
+	device := &models.Device{}
+
+	if err := tx.Find(device, c.Param("device_id")); err != nil {
+		return c.Error(404, err)
+	}
+
+	if err := c.Bind(device); err != nil {
+		return err
+	}
+
+	verrs, err := tx.ValidateAndUpdate(device)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+
+	if verrs.HasAny() {
+		c.Set("device", device)
+		c.Set("errors", verrs)
+		return c.Render(422, r.HTML("devices/edit.plush.html"))
+	}
+
+	// If there are no errors set a success message
+	c.Flash().Add("success", "Device was updated successfully")
+	return c.Redirect(302, "/devices/%s", device.ID)
 }
 
 func DevicesDestroy(c buffalo.Context) error {
