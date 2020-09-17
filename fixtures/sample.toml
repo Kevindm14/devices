@@ -1,32 +1,59 @@
 [[scenario]]
-name = "lots of widgets"
+name = "lots of devices"
 
   [[scenario.table]]
-    name = "widgets"
+    name = "devices"
 
     [[scenario.table.row]]
-      id = "<%= uuidNamed("widget") %>"
-      name = "This is widget #1"
-      body = "some widget body"
+      id = "<%= uuidNamed("device") %>"
+      manufacture = "123456"
+      make = "iphone"
+      model = "xr"
+      storage = "64gb"
+      cost = "10000"
+      color = "white"
+      operating_system = "android"
+      image = "https://images-na.ssl-images-amazon.com/images/I/61LA-THTwWL._AC_SL1500_.jpg"
+      is_new = false
       created_at = "<%= now() %>"
       updated_at = "<%= now() %>"
 
     [[scenario.table.row]]
       id = "<%= uuid() %>"
-      name = "This is widget #2"
-      body = "some widget body"
+      manufacture = "123456"
+      make = "samsung"
+      model = "s20"
+      storage = "64gb"
+      cost = "10000"
+      color = "white"
+      operating_system = "android"
+      image = "https://images-na.ssl-images-amazon.com/images/I/61LA-THTwWL._AC_SL1500_.jpg"
+      is_new = false
       created_at = "<%= now() %>"
       updated_at = "<%= now() %>"
+
+[[scenario]]
+name = "lots of users"
 
   [[scenario.table]]
     name = "users"
 
     [[scenario.table.row]]
-      id = "<%= uuid() %>"
-      name = "Mark Bates"
-      admin = true
-      age = 41
-      widget_id = "<%= uuidNamed("widget") %>"
+      id = "<%= uuidNamed("user") %>"
+      first_name = "kevin"
+      last_name = "diaz"
+      email = "example@gmail.com"
+      role = "RegularUser"
+      manager_email = "admin@admin.com"
       created_at = "<%= now() %>"
       updated_at = "<%= now() %>"
 
+    [[scenario.table.row]]
+      id = "<%= uuid() %>"
+      first_name = "kevin"
+      last_name = "diaz"
+      email = "example@gmail.com"
+      role = "manager"
+      manager_email = "No"
+      created_at = "<%= now() %>"
+      updated_at = "<%= now() %>"

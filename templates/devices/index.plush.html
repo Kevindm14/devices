@@ -1,0 +1,46 @@
+<div class="bg-white">
+  <div class="d-flex container justify-content-between align-items-center py-4">
+    <%= partial("links.html") %>
+    <a href="<%= newDevicesPath() %>" class="btn btn-info px-4 py-2">Add devices</a>
+  </div>
+</div>
+
+<div class="bg-light">
+  <%= partial("flash.html") %>
+  <div class="container py-5">
+    <p class="text-muted">
+      <b class="h3"><%= len(devices) %></b> Devices
+    </p>
+    <table class="table border bg-white">
+      <thead class="text-muted py-2"> 
+        <tr>
+          <th>Device Names <i class="fas fa-sort"></i></th>
+          <th>Device Type <i class="fas fa-sort"></i></th>
+          <th>Cost <i class="fas fa-sort"></i></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for (device) in devices { %>
+        <tr>
+            <td class="title-device"><%= device.Make %> <%= device.Model %></td>
+            <td class="td-table td-info"><%= device.OperatingSystem %></td>
+            <td class="td-info">$<%= device.Cost %></td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-more border" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-ellipsis-h text-muted"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item btn-dropwdown" href="<%= devicePath({device_id: device.ID}) %>">View</a>
+                  <a class="dropdown-item btn-dropwdown" href="<%= editDevexPath({device_id: device.ID}) %>">Edit</a>
+                  <a class="dropdown-item btn-delete" href="<%= devexPath({ device_id: device.ID }) %>" data-method="DELETE" data-confirm="Are you sure?">Delete</a>
+                </div>
+              </div>
+            </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

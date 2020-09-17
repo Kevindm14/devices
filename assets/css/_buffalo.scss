@@ -1,133 +1,127 @@
-.container {
-  min-width: 320px;
+body, html {
+  height: 100%;
 }
 
 header {
-  background-color: #62a5ee;
-  padding: 10px 20px;
+  background-color: rgb(0, 174, 241);
   box-sizing: border-box;
 }
 
 .logo {
-  img {
-    width: 80px;
-  }
+  border-right: 1px solid white;
+  margin-right: 10px;
 }
 
-.titles {
-  h1 {
-    font-size: 30px;
-    font-weight: 300;
-    color: white;
-    margin-bottom: 13px;
-    margin-top: 5px;
-  }
-
-  h2 {
-    font-weight: 300;
-    font-size: 18px;
-    display: inline-block;
-    margin: 0;
-  }
-
-  a {
-    color: white;
-    text-decoration: underline;
-  }
-
-  i {
-    margin-right: 5px;
-    text-decoration: none;
-  }
-
-  .documentation {
-    margin-left: 28px;
-  }
+.title-nav {
+  color: rgba(245, 245, 245, 0.637) !important;
+  font-size: medium;
 }
 
-.subtitle {
-  color: white;
+ul {
   margin: 0;
-  padding: 13px 0;
-  background-color: #2a3543;
-  margin-bottom: 20px;
-
-  h3 {
-    font-size: 22px;
-    font-weight: 400;
-    margin: 0;
-  }
+  padding: 0;
+  list-style-type: none;
 }
+
+.item a {
+  margin: 0 5px;
+  padding: 10px;
+  border-radius: 10px;
+  color: rgb(83, 82, 82);
+  font-weight: 300;
+  text-decoration: none;
+}
+
+.item a:hover {
+  background: rgba(212, 240, 252, 0.925);
+  color: rgb(13, 59, 102);
+}
+
+.title-detail {
+  font-size: 25px;
+}
+
+.type-detail {
+  font-size: 18px;
+}
+
+.label-user {
+  font-size: 20px;
+}
+
+.form-control {
+  border-radius: 0;
+}
+
+.btn-info {
+  background: rgb(0, 172, 243);
+  border: none;
+}
+
+.btn-info:hover {
+  background: rgb(1, 129, 184);
+}
+
+.btn-devices {
+  padding: 20px 163px;
+}
+
+/* TABLE */
 
 table {
-  font-size: 14px;
-
-  &.table tbody tr td {
-    border-top: 0;
-    padding: 10px;
-  }
+  font-size: 16px;
 }
 
-.foot {
-  text-align: right;
-  color: #c5c5c5;
+.fa-sort {
+  color: rgb(150, 147, 147);
+}
+
+th {
+  color: rgb(83, 82, 82);
   font-weight: 300;
-
-  a {
-    color: #8b8b8b;
-    text-decoration: underline;
-  }
 }
 
-.centered {
-  text-align: center;
+.td-table {
+  width: 140px;
 }
 
-@media all and (max-width: 770px) {
-  .titles {
-    h1 {
-      font-size: 25px;
-      margin: 15px 0 5px 0;
-    }
-  }
+.td-info {
+  color: rgb(105, 104, 104);
 }
 
-@media all and (max-width: 640px) {
-  .titles {
-    h1 {
-      font-size: 23px;
-      margin: 15px 0 5px 0;
-    }
-
-    h2 {
-      font-size: 15px;
-    }
-
-    .documentation {
-      margin-left: 10px;
-    }
-  }
+table th:first-child, table td:first-child { 
+  padding-left: 3rem; 
+}
+table th:last-child, table td:last-child { 
+  padding-right: 3rem; 
 }
 
-@media all and (max-width: 530px) {
-  .titles {
-    h1 {
-      font-size: 20px;
-      margin: 5px 0;
-    }
-
-    .documentation {
-      margin-left: 0px;
-      margin-top: 5px;
-      display: block;
-    }
-  }
-
-  .logo {
-    padding: 0;
-
-    img {
-      width: 100%
-    }
-  }
+table th:last-child, table td:last-child { 
+  width: 100px;
 }
+
+.dropdown-menu {
+  border-radius: 10px;
+}
+
+.btn-dropwdown {
+  color: rgb(105, 104, 104);
+}
+
+.btn-more {
+  width: 60px;
+}
+
+table th {
+  height: 60px;
+}
+
+.btn-delete {
+  color: red;
+}
+
+.title-device {
+  color: rgb(0, 174, 241);
+}
+
+/*****************/
