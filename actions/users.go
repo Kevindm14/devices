@@ -70,6 +70,13 @@ func UsersDetail(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 
+	users := []models.User{}
+	err := tx.Where("manager_email = ?", user.Email).All(&users)
+	if err != nil {
+		return err
+	}
+
+	c.Set("users", users)
 	c.Set("user", user)
 	return c.Render(200, r.HTML("users/show"))
 }
