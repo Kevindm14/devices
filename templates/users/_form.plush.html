@@ -1,6 +1,6 @@
 <div class="row form-group">
     <div class="col-lg-3">
-        <label class="label-user font-weight-bold">User Basic Information</label>
+        <h1 class="label-user font-weight-bold">User Basic Information</h1>
     </div>
     <div class="col-lg-9">
         <hr/>
@@ -9,46 +9,46 @@
 <div class="row form-group">
     <div class="col-lg-6">
         <div class="form-group">
-            <%= f.InputTag("FirstName", { class: "border border-secondary"}) %>
+            <%= f.InputTag("FirstName") %>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="form-group">        
-            <%= f.InputTag("LastName", { class: "border border-secondary"}) %>
+            <%= f.InputTag("LastName") %>
         </div>
     </div>
 </div>
 <div class="row form-group">
     <div class="col-lg-12">
         <div class="form-group">
-            <%= f.InputTag("Email", { class: "border border-secondary"}) %>
+            <%= f.InputTag("Email", { type: "email" }) %>
         </div>
     </div>
 </div>
 <div class="row form-group">
     <div class="col-lg-3">
-        <label class="label-user font-weight-bold">User Configuration</label>
+        <h2 class="label-user font-weight-bold">User Configuration</h2>
     </div>
     <div class="col-lg-9">
         <hr/>
     </div>
 </div>
 
-<div class="row">
+<div class="row form-group">
     <div class="col-lg-12">
         <label>User Role</label>
     </div>
 </div>
 
-<div class="row form-group">
+<div class="row">
     <div class="col-lg-3">
-        <div class="form-group pl-3 py-2 border border-secondary">
-            <input type="radio" name="Role" value="RegularUser" id="regularUser">
+        <div class="form-group border border-secondary rounded p-3" id="radioUser">
+            <input type="radio" name="Role" value="RegularUser" checked id="regularUser">
             <label>Regular User</label>
         </div>
     </div>
     <div class="col-lg-3 border-info">
-        <div class="form-group pl-3 py-2 border border-secondary">
+        <div class="form-group border border-secondary rounded p-3" id="radioManager">
             <input type="radio" name="Role" value="Manager" id="manager">
             <label>Manager</label>
         </div>
@@ -58,7 +58,7 @@
 <div class="row form-group">
     <div class="col-lg-12">
         <div class="form-group" id="emailManager">
-            <%= f.InputTag("ManageEmail", { type: "email", name: "ManagerEmail", class: "border border-secondary", id: "manageEmail" }) %>
+            <%= f.InputTag("ManagerEmail", { type: "email", name: "ManagerEmail", id: "manageEmail" }) %>
         </div>
     </div>
 </div>

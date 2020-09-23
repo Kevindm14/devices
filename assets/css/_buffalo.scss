@@ -2,6 +2,19 @@ body, html {
   height: 100%;
 }
 
+.borde {
+  border: 1px solid rgb(0, 174, 241) !important;
+}
+
+label {
+  margin: 0;
+  color: rgb(83, 82, 82) !important; 
+}
+
+.body-app {
+  height: 100%;
+}
+
 header {
   background-color: rgb(0, 174, 241);
   box-sizing: border-box;
@@ -10,11 +23,17 @@ header {
 .logo {
   border-right: 1px solid white;
   margin-right: 10px;
+  width: 125px;
+  padding-right: 20px;
+}
+
+.nav-logo {
+  margin: 15px 0;
 }
 
 .title-nav {
   color: rgba(245, 245, 245, 0.637) !important;
-  font-size: medium;
+  font-size: 14px;
 }
 
 ul {
@@ -27,14 +46,14 @@ ul {
   margin: 0 5px;
   padding: 10px;
   border-radius: 10px;
-  color: rgb(83, 82, 82);
-  font-weight: 300;
+  color: rgb(73, 72, 72);
+  font-weight: 400;
   text-decoration: none;
 }
 
 .item a:hover {
   background: rgba(212, 240, 252, 0.925);
-  color: rgb(13, 59, 102);
+  color: rgb(14, 70, 122);
 }
 
 .title-detail {
@@ -62,10 +81,6 @@ ul {
   background: rgb(1, 129, 184);
 }
 
-.btn-devices {
-  padding: 20px 163px;
-}
-
 /* TABLE */
 
 table {
@@ -89,11 +104,17 @@ th {
   color: rgb(105, 104, 104);
 }
 
+table td {
+  vertical-align: center;
+  padding-top: 1.5em !important;
+  padding-bottom: 1.5em !important;
+}
+
 table th:first-child, table td:first-child { 
-  padding-left: 3rem; 
+  padding-left: 2em; 
 }
 table th:last-child, table td:last-child { 
-  padding-right: 3rem; 
+  padding-right: 2em; 
 }
 
 table th:last-child, table td:last-child { 
@@ -110,10 +131,9 @@ table th:last-child, table td:last-child {
 
 .btn-more {
   width: 60px;
-}
-
-table th {
-  height: 60px;
+  border: none;
+  outline: none !important;
+  background: #fff;
 }
 
 .btn-delete {
@@ -125,3 +145,17 @@ table th {
 }
 
 /*****************/
+
+.form-control {
+  height: 40px;
+  border: 1px solid #9D9EA4;
+  border-radius: 2px;
+  font-size: 18px;
+  color: #495057;
+  margin: 10px 0;
+}
+
+.active {
+  background: rgba(212, 240, 252, 0.925);
+  color: rgb(14, 70, 122) !important;
+}

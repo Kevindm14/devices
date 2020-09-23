@@ -4,20 +4,28 @@ require("@fortawesome/fontawesome-free/js/all.js");
 
 const role = document.getElementById("regularUser"),
     divEmail = document.getElementById("emailManager"),
-    manager = document.getElementById("manager");
+    manager = document.getElementById("manager"),
+    divRadio = document.getElementById("radioUser"),
+    managerEmail = document.getElementById("managerEmail"),
+    users = document.getElementById("users"),
+    devices = document.getElementById("devices"),
+    divManager = document.getElementById("radioManager");
 
-divEmail.style.display = "none"
+divRadio.classList.add("borde")
 
 role.addEventListener("click", () => {
     if (role.checked) {
-        console.log("hola")
-        divEmail.style.display = "block"
+        divEmail.style.display = "block";
+        divRadio.classList.add("borde");
+        divManager.classList.remove("borde");
     }
-})
+});
 
 manager.addEventListener("click", () => {
     if (manager.checked) {
-        console.log("hola")
         divEmail.style.display = "none"
+        divRadio.classList.remove("borde");
+        divManager.classList.add("borde");
+        console.log(managerEmail.value)
     }
-})
+});

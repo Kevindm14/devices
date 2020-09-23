@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"strings"
@@ -31,6 +32,13 @@ type Device struct {
 type PresenceValidator struct {
 	Field string
 	Cost  float64
+}
+
+func (d *Device) BeforeCreate(tx *pop.Connection) error {
+	image := d.Image
+	d.Image = base64.StdEncoding.EncodeToString([]byte(image))
+
+	return nil
 }
 
 func (v *PresenceValidator) IsValid(errors *validate.Errors) {

@@ -40,11 +40,6 @@ func UsersCreate(c buffalo.Context) error {
 		return err
 	}
 
-	managerEmail := c.Param("ManagerEmail")
-	if managerEmail == "" {
-		user.ManagerEmail = "No"
-	}
-
 	verrs, err := tx.ValidateAndCreate(user)
 	if err != nil {
 		return err

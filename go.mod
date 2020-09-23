@@ -3,6 +3,7 @@ module devices
 go 1.15
 
 require (
+	github.com/dustin/go-humanize v1.0.0
 	github.com/gobuffalo/buffalo v0.15.5
 	github.com/gobuffalo/buffalo-pop/v2 v2.2.0
 	github.com/gobuffalo/envy v1.9.0
@@ -11,6 +12,7 @@ require (
 	github.com/gobuffalo/mw-i18n v0.0.0-20190129204410-552713a3ebb4
 	github.com/gobuffalo/mw-paramlogger v0.0.0-20190129202837-395da1998525
 	github.com/gobuffalo/packr/v2 v2.8.0
+	github.com/gobuffalo/plush v3.8.3+incompatible
 	github.com/gobuffalo/pop/v5 v5.2.4
 	github.com/gobuffalo/suite/v3 v3.0.0
 	github.com/gobuffalo/validate/v3 v3.1.0

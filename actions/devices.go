@@ -37,8 +37,6 @@ func DevicesCreate(c buffalo.Context) error {
 		return err
 	}
 
-	image := c.Param("Image")
-	device.Image = base64.StdEncoding.EncodeToString([]byte(image))
 	verrs, err := tx.ValidateAndCreate(device)
 	if err != nil {
 		return err
