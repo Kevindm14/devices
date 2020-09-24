@@ -3,6 +3,7 @@ module devices
 go 1.15
 
 require (
+	github.com/corpix/uarand v0.1.1 // indirect
 	github.com/dustin/go-humanize v1.0.0
 	github.com/gobuffalo/buffalo v0.15.5
 	github.com/gobuffalo/buffalo-pop/v2 v2.2.0
@@ -17,7 +18,9 @@ require (
 	github.com/gobuffalo/suite/v3 v3.0.0
 	github.com/gobuffalo/validate/v3 v3.1.0
 	github.com/gofrs/uuid v3.2.0+incompatible
+	github.com/icrowley/fake v0.0.0-20180203215853-4178557ae428 // indirect
 	github.com/markbates/grift v1.5.0
 	github.com/pkg/errors v0.9.1
 	github.com/unrolled/secure v0.0.0-20190103195806-76e6d4e9b90c
+	github.com/wawandco/fako v0.0.0-20180828010250-c36a0bc97398
 )

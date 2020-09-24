@@ -37,12 +37,6 @@ func (u Users) String() string {
 	return string(ju)
 }
 
-type Presence struct {
-	Field        string
-	Email        string
-	ManagerEmail string
-}
-
 // Validate gets run every time you call a "pop.Validate*" (pop.ValidateAndSave, pop.ValidateAndCreate, pop.ValidateAndUpdate) method.
 // This method is not required and may be deleted.
 func (u *User) Validate(tx *pop.Connection) (*validate.Errors, error) {
@@ -51,7 +45,6 @@ func (u *User) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: u.LastName, Name: "LastName"},
 		&validators.StringIsPresent{Field: u.Role, Name: "Role"},
 		&validators.EmailIsPresent{Field: u.Email, Name: "Email", Message: "Email is not in the right format."},
-		&validators.EmailIsPresent{Field: u.ManagerEmail, Name: "ManagerEmail", Message: "ManagerEmail is obglitatory."},
 		&validators.FuncValidator{
 			Field:   u.Email,
 			Name:    "Email",

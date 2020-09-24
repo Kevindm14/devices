@@ -27,6 +27,14 @@ func UsersIndex(c buffalo.Context) error {
 		return errors.WithStack(err)
 	}
 
+	usersTotal := []models.User{}
+	err := tx.All(&usersTotal)
+
+	if err != nil {
+		return err
+	}
+
+	c.Set("usersTotal", usersTotal)
 	c.Set("pagination", q.Paginator)
 	c.Set("users", users)
 	return c.Render(http.StatusOK, r.HTML("users/index.html"))

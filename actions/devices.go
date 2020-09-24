@@ -24,6 +24,14 @@ func DevicesIndex(c buffalo.Context) error {
 		return errors.WithStack(err)
 	}
 
+	devicesTotal := []models.Device{}
+	errr := tx.All(&devicesTotal)
+
+	if errr != nil {
+		return errr
+	}
+
+	c.Set("devicesTotal", devicesTotal)
 	c.Set("pagination", q.Paginator)
 	c.Set("devices", devices)
 	return c.Render(http.StatusOK, r.HTML("devices/index.html"))

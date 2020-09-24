@@ -9,7 +9,7 @@
   <%= partial("flash.html") %>
   <div class="container py-5">
     <p class="text-muted">
-      <b class="h3"><%= len(users) %></b> <%= is_Plural(len(users), "User") %>
+      <b class="h3"><%= len(usersTotal) %></b> <%= is_Plural(len(users), "User") %>
     </p>
     <table class="table border rounded bg-white">
       <thead class="text-muted">
@@ -44,5 +44,8 @@
         <% } %>
       </tbody>
     </table>
+    <div class="d-flex justify-content-end text-center">
+      <%= paginator(pagination) %>
+    </div>
   </div>
 </div>
