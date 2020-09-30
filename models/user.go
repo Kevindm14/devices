@@ -2,8 +2,6 @@ package models
 
 import (
 	"encoding/json"
-	"fmt"
-	"strings"
 	"time"
 
 	"github.com/gobuffalo/pop/v5"
@@ -39,28 +37,31 @@ func (u Users) String() string {
 	return string(ju)
 }
 
-type Presence struct {
-	Field        string
-	Email        string
-	ManagerEmail string
-}
-
-func (v *Presence) IsValid(errors *validate.Errors) {
-	if v.Email == v.ManagerEmail {
-		errors.Add(strings.ToLower(v.Field), fmt.Sprintf("%s cannot be the same!", v.Field))
-	}
-}
-
 // Validate gets run every time you call a "pop.Validate*" (pop.ValidateAndSave, pop.ValidateAndCreate, pop.ValidateAndUpdate) method.
 // This method is not required and may be deleted.
 func (u *User) Validate(tx *pop.Connection) (*validate.Errors, error) {
 	return validate.Validate(
 		&validators.StringIsPresent{Field: u.FirstName, Name: "FirstName"},
 		&validators.StringIsPresent{Field: u.LastName, Name: "LastName"},
-		&validators.StringIsPresent{Field: u.Email, Name: "Email"},
 		&validators.StringIsPresent{Field: u.Role, Name: "Role"},
-		&validators.EmailIsPresent{Field: u.Email, Name: "Email"},
-		&Presence{"Emails", u.Email, u.ManagerEmail},
+		&validators.EmailIsPresent{Field: u.Email, Name: "Email", Message: "Email is not in the right format."},
+		&validators.FuncValidator{
+			Field:   u.Email,
+			Name:    "Email",
+			Message: "%s is already taken",
+			Fn: func() bool {
+				var b bool
+				q := tx.Where("email = ?", u.Email)
+				if u.ID != uuid.Nil {
+					q = q.Where("id != ?", u.ID)
+				}
+				b, err := q.Exists(u)
+				if err != nil {
+					return false
+				}
+				return !b
+			},
+		},
 	), nil
 }
 

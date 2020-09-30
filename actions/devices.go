@@ -24,6 +24,14 @@ func DevicesIndex(c buffalo.Context) error {
 		return errors.WithStack(err)
 	}
 
+	devicesTotal := []models.Device{}
+	errr := tx.All(&devicesTotal)
+
+	if errr != nil {
+		return errr
+	}
+
+	c.Set("devicesTotal", devicesTotal)
 	c.Set("pagination", q.Paginator)
 	c.Set("devices", devices)
 	return c.Render(http.StatusOK, r.HTML("devices/index.html"))
@@ -32,28 +40,41 @@ func DevicesIndex(c buffalo.Context) error {
 func DevicesCreate(c buffalo.Context) error {
 	tx := c.Value("tx").(*pop.Connection)
 	device := &models.Device{}
+	deviceVar := &models.DeviceVariations{}
+
+	if err := c.Bind(deviceVar); err != nil {
+		return err
+	}
 
 	if err := c.Bind(device); err != nil {
 		return err
 	}
 
-	image := c.Param("Image")
-	device.Image = base64.StdEncoding.EncodeToString([]byte(image))
-	verrs, err := tx.ValidateAndCreate(device)
-	if err != nil {
-		return err
+	for i := 0; i < len(deviceVar.Storage); i++ {
+
+		devices := &models.Device{
+			Manufacture:     device.Manufacture,
+			Make:            device.Make,
+			Model:           device.Model,
+			Storage:         deviceVar.Storage[i],
+			Cost:            deviceVar.Cost[i],
+			OperatingSystem: device.OperatingSystem,
+			Image:           deviceVar.Image[i],
+		}
+
+		verrs, err := tx.ValidateAndCreate(devices)
+		if err != nil {
+			return err
+		}
+
+		if verrs.HasAny() {
+			c.Set("device", device)
+			c.Set("errors", verrs)
+			return c.Render(422, r.HTML("devices/new.plush.html"))
+		}
 	}
 
-	if verrs.HasAny() {
-		c.Set("device", device)
-		c.Set("errors", verrs)
-		return c.Render(422, r.HTML("devices/new.plush.html"))
-	}
-
-	// If there are no errors set a success message
-	c.Flash().Add("success", "Device was created successfully")
-
-	return c.Redirect(302, "/devices/%s", device.ID)
+	return c.Redirect(302, "/devices")
 }
 
 func DevicesNew(c buffalo.Context) error {

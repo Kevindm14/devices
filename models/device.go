@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"strings"
@@ -11,6 +12,13 @@ import (
 	"github.com/gobuffalo/validate/v3/validators"
 	"github.com/gofrs/uuid"
 )
+
+type DeviceVariations struct {
+	Storage []string
+	Cost    []float64
+	Color   []string
+	Image   []string
+}
 
 // Device is used by pop to map your devices database table to your go code.
 type Device struct {
@@ -31,6 +39,13 @@ type Device struct {
 type PresenceValidator struct {
 	Field string
 	Cost  float64
+}
+
+func (d *Device) BeforeCreate(tx *pop.Connection) error {
+	image := d.Image
+	d.Image = base64.StdEncoding.EncodeToString([]byte(image))
+
+	return nil
 }
 
 func (v *PresenceValidator) IsValid(errors *validate.Errors) {

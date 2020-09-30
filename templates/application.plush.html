@@ -12,10 +12,10 @@
   <body>
     <div class="bg-dark">
       <header>
-        <div class="container navbar-dark py-1">
+        <div class="container navbar-dark">
           <div class="d-flex align-items-center">
-            <div class="my-2">
-              <img src="<%= assetPath("images/logo.png") %>" alt="logo" class="logo">
+            <div class="nav-logo">
+              <img src="<%= assetPath("images/admin-white-logo.png") %>" alt="logo" class="logo">
               <h1 class="navbar-brand title-nav">ADMINISTRATION</h1>
             </div>
           </div>
@@ -23,7 +23,7 @@
       </header>
     </div>
 
-    <div class="bg-white">
+    <div class="bg-light body-app">
       <%= yield %>
     </div>
 

@@ -27,6 +27,14 @@ func UsersIndex(c buffalo.Context) error {
 		return errors.WithStack(err)
 	}
 
+	usersTotal := []models.User{}
+	err := tx.All(&usersTotal)
+
+	if err != nil {
+		return err
+	}
+
+	c.Set("usersTotal", usersTotal)
 	c.Set("pagination", q.Paginator)
 	c.Set("users", users)
 	return c.Render(http.StatusOK, r.HTML("users/index.html"))
@@ -38,11 +46,6 @@ func UsersCreate(c buffalo.Context) error {
 
 	if err := c.Bind(user); err != nil {
 		return err
-	}
-
-	managerEmail := c.Param("ManagerEmail")
-	if managerEmail == "" {
-		user.ManagerEmail = "No"
 	}
 
 	verrs, err := tx.ValidateAndCreate(user)
@@ -70,6 +73,13 @@ func UsersDetail(c buffalo.Context) error {
 		return c.Error(404, err)
 	}
 
+	users := []models.User{}
+	err := tx.Where("manager_email = ?", user.Email).All(&users)
+	if err != nil {
+		return err
+	}
+
+	c.Set("users", users)
 	c.Set("user", user)
 	return c.Render(200, r.HTML("users/show"))
 }
