@@ -2,7 +2,7 @@ package actions
 
 import (
 	"devices/models"
-	"fmt"
+	"net/http"
 	"net/url"
 )
 
@@ -16,7 +16,6 @@ func (as *ActionSuite) CreateItem() *models.Device {
 		OperatingSystem: "Android",
 		Color:           "Yellow",
 		Image:           "https://images-na.ssl-images-amazon.com/images/I/61LA-THTwWL._AC_SL1500_.jpg",
-		IsNew:           false,
 	}
 	verrs, err := as.DB.ValidateAndCreate(device)
 	as.NoError(err)
@@ -58,18 +57,39 @@ func (as *ActionSuite) Test_Devices_Create() {
 		Make:            "Iphone",
 		Model:           "xr",
 		Storage:         "64gb",
-		Cost:            100.000,
 		OperatingSystem: "Android",
-		Color:           "Yellow",
-		Image:           "https://images-na.ssl-images-amazon.com/images/I/61LA-THTwWL._AC_SL1500_.jpg",
-		IsNew:           false,
 	}
 
-	res := as.HTML("/devices").Post(&device)
+	deviceVar := models.DeviceVariations{
+		Storage: []string{"32GB", "64GB"},
+		Cost:    []float64{10000, 20000},
+		Color:   []string{"Blue", "Red"},
+		Image: []string{
+			"https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQ_F2DSXXspdC8ytBT2K6xmCwJX5A5bMR80AkvpRK-W_8XK9c2JCQM&usqp=CAc",
+			"https://m.media-amazon.com/images/I/51n24DedexL.jpg",
+		},
+	}
+
+	var res *http.Response
+
+	for i := 0; i < len(deviceVar.Storage); i++ {
+		devices := &models.Device{
+			Manufacture:     device.Manufacture,
+			Make:            device.Make,
+			Model:           device.Model,
+			Storage:         deviceVar.Storage[i],
+			Cost:            deviceVar.Cost[i],
+			OperatingSystem: device.OperatingSystem,
+			Image:           deviceVar.Image[i],
+		}
+
+		res = as.HTML("/devices").Post(&device)
+	}
+
 	as.DB.Last(&device)
 	as.Equal(302, res.Code)
 
-	as.Equal(fmt.Sprintf("/devices/%s", device.ID), res.Location())
+	as.Equal("/devices", res.Location())
 	as.NotZero(device.ID)
 	as.NotZero(device.CreatedAt)
 }
@@ -86,7 +106,6 @@ func (as *ActionSuite) Test_Devices_Update() {
 		"OperatingSystem": []string{"Android"},
 		"Color":           []string{"Yellow"},
 		"Image":           []string{"https://images-na.ssl-images-amazon.com/images/I/61LA-THTwWL._AC_SL1500_.jpg"},
-		"IsNew":           []string{"false"},
 	}
 
 	res := as.HTML("/devices/%s", device.ID).Put(deviceNew)

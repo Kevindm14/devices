@@ -13,6 +13,13 @@ import (
 	"github.com/gofrs/uuid"
 )
 
+type DeviceVariations struct {
+	Storage []string
+	Cost    []float64
+	Color   []string
+	Image   []string
+}
+
 // Device is used by pop to map your devices database table to your go code.
 type Device struct {
 	ID              uuid.UUID `json:"id" db:"id"`

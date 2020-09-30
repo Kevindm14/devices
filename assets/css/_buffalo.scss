@@ -159,3 +159,12 @@ table th:last-child, table td:last-child {
   background: rgba(212, 240, 252, 0.925);
   color: rgb(14, 70, 122) !important;
 }
+
+.btn-version {
+  background: none;
+  color: rgb(0, 172, 243);
+  border: none;
+  font-size: 15px;
+  text-transform: uppercase;
+  outline: none !important;
+}
