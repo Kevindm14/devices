@@ -44,7 +44,7 @@ func (u *User) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: u.FirstName, Name: "FirstName"},
 		&validators.StringIsPresent{Field: u.LastName, Name: "LastName"},
 		&validators.StringIsPresent{Field: u.Role, Name: "Role"},
-		&validators.EmailIsPresent{Field: u.Email, Name: "Email", Message: "Email is not in the right format."},
+		&validators.EmailIsPresent{Field: u.Email, Name: "Email", Message: "Email must not be blank!"},
 		&validators.FuncValidator{
 			Field:   u.Email,
 			Name:    "Email",

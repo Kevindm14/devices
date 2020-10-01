@@ -19,8 +19,8 @@ func init() {
 
 		// Add template helpers here:
 		Helpers: render.Helpers{
-			"is_Plural": isPlural,
-			"is_Active": isActive,
+			"isPlural": isPlural,
+			"isActive": isActive,
 		},
 	})
 }

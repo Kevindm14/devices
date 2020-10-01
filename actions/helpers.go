@@ -3,7 +3,13 @@ package actions
 import (
 	"fmt"
 	"html/template"
+
+	"github.com/dustin/go-humanize/english"
 )
+
+func isPlural(count int, name string) string {
+	return english.PluralWord(count, name, "")
+}
 
 func isActive(route string) template.HTML {
 	if route == "/users/" {
