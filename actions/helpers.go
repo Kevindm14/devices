@@ -1,24 +1,24 @@
 package actions
 
 import (
-	"fmt"
-	"html/template"
+	"net/http"
+	"strings"
 
 	"github.com/dustin/go-humanize/english"
+	"github.com/gobuffalo/plush"
 )
 
 func isPlural(count int, name string) string {
 	return english.PluralWord(count, name, "")
 }
 
-func isActive(route string) template.HTML {
-	if route == "/users/" {
-		return template.HTML(fmt.Sprint(
-			`<li class='item'><a class='active' href='<%= usersPath() %>'>Users</a></li>
-			 <li class='item'><a href='<%= devicesPath() %>'>Devices</a></li>`))
+func isActive(route string, help plush.HelperContext) string {
+	request := help.Value("request").(*http.Request)
+	requestURL := request.URL.String()
+
+	if strings.Contains(requestURL, route) {
+		return "active"
 	}
 
-	return template.HTML(fmt.Sprint(
-		`<li class='item'><a href='<%= usersPath() %>'>Users</a></li>
-		 <li class='item'><a class='active' href='<%= devicesPath() %>'>Devices</a></li>`))
+	return ""
 }

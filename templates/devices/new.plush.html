@@ -1,10 +1,15 @@
 <div class="bg-white h-100">
     <%= form_for(device, {action: devicesPath(), method: "POST"}) { %>
-        <div class="bg-light p-3">
-            <div class="container d-flex justify-content-end">
-                <a class="btn btn-secondary btn-form px-4 py-2" href="<%=  devicesPath() %>">Cancel</a>
-                <input type="submit" class="btn btn-info btn-form ml-2 px-4 py-2" value="Save Device">
-            </div>            
+        <div class="bg-light py-4">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div>
+                    <%= partial("links.html") %>
+                </div>
+                <div>
+                    <a class="btn btn-secondary btn-form px-4 py-2" href="<%=  devicesPath() %>">Cancel</a>
+                    <input type="submit" class="btn btn-info btn-form ml-2 px-4 py-2" value="Save Device">
+                </div>
+            </div>
         </div>
         <div class="container py-5">
             <h1 class="h4">New device</h1>

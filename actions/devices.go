@@ -11,6 +11,10 @@ import (
 	"github.com/pkg/errors"
 )
 
+func HomeHandler(c buffalo.Context) error {
+	return c.Redirect(302, "/devices")
+}
+
 func DevicesIndex(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	devices := &models.Devices{}

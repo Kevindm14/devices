@@ -24,6 +24,7 @@ $("#manager").on("click", () => {
         divEmail.style.display = "none"
         divRadio.classList.remove("borde");
         divManager.classList.add("borde");
+        $("#manageEmail").val("")
     }
 });
 

@@ -78,7 +78,6 @@ func (d *Device) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: d.Make, Name: "Make"},
 		&validators.StringIsPresent{Field: d.Model, Name: "Model"},
 		&validators.StringIsPresent{Field: d.Storage, Name: "Storage"},
-		&PresenceValidator{"Cost", d.Cost},
 	), nil
 }
 

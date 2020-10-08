@@ -2,6 +2,7 @@ package models
 
 import (
 	"encoding/json"
+	"regexp"
 	"time"
 
 	"github.com/gobuffalo/pop/v5"
@@ -44,7 +45,21 @@ func (u *User) Validate(tx *pop.Connection) (*validate.Errors, error) {
 		&validators.StringIsPresent{Field: u.FirstName, Name: "FirstName"},
 		&validators.StringIsPresent{Field: u.LastName, Name: "LastName"},
 		&validators.StringIsPresent{Field: u.Role, Name: "Role"},
-		&validators.EmailIsPresent{Field: u.Email, Name: "Email", Message: "Email must not be blank!"},
+		&validators.StringIsPresent{Field: u.Email, Name: "Email"},
+		&validators.FuncValidator{
+			Field:   u.Email,
+			Name:    "Email",
+			Message: "%s does not match the email format.",
+			Fn: func() bool {
+				re := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+				if !re.MatchString(u.Email) {
+					if u.Email != "" {
+						return false
+					}
+				}
+				return true
+			},
+		},
 		&validators.FuncValidator{
 			Field:   u.Email,
 			Name:    "Email",
@@ -60,6 +75,19 @@ func (u *User) Validate(tx *pop.Connection) (*validate.Errors, error) {
 					return false
 				}
 				return !b
+			},
+		},
+		&validators.FuncValidator{
+			Field:   u.ManagerEmail,
+			Name:    "ManagerEmail",
+			Message: "%s ManagerEmail is obligatory",
+			Fn: func() bool {
+				if u.Role == "RegularUser" {
+					if u.ManagerEmail == "" {
+						return false
+					}
+				}
+				return true
 			},
 		},
 	), nil
