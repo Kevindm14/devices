@@ -21,6 +21,7 @@ func init() {
 		Helpers: render.Helpers{
 			"isPlural": isPlural,
 			"isActive": isActive,
+			"order":    order,
 		},
 	})
 }

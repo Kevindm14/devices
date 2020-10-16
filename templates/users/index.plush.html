@@ -14,9 +14,33 @@
     <table class="table border rounded bg-white">
       <thead class="text-muted">
         <tr>
-          <th>Name <i class="fas fa-sort"></i></th>
-          <th>Email <i class="fas fa-sort"></i></th>
-          <th>Role <i class="fas fa-sort"></i></th>
+          <th>
+            <div class="d-flex align-items-center">
+              <span class="mr-2">Name</span>
+              <div class="d-flex flex-column">
+                <a class="btn-sort-up" href="<%= usersPath({column: "first_name", direction: "asc"}) %>"><i class="fas fa-angle-up"></i></a>
+                <a class="btn-sort-down" href="<%= usersPath({column: "first_name", direction: "desc"}) %>"><i class="fas fa-angle-down"></i></a>
+              </div>
+            </div>
+          </th>
+          <th>
+            <div class="d-flex align-items-center">
+              <span class="mr-2">Email</span>
+              <div class="d-flex flex-column">
+                <a class="btn-sort-up" href="<%= usersPath({column: "email", direction: "asc"}) %>"><i class="fas fa-angle-up"></i></a>
+                <a class="btn-sort-down" href="<%= usersPath({column: "email", direction: "desc"}) %>"><i class="fas fa-angle-down"></i></a>
+              </div>
+            </div>
+          </th>
+          <th>
+            <div class="d-flex align-items-center">
+              <span class="mr-2">Role</span>
+              <div class="d-flex flex-column">
+                <a class="btn-sort-up" href="<%= usersPath({column: "role", direction: "asc"}) %>"><i class="fas fa-angle-up"></i></a>
+                <a class="btn-sort-down" href="<%= usersPath({column: "role", direction: "desc"}) %>"><i class="fas fa-angle-down"></i></a>
+              </div>
+            </div>
+          </th>
           <th></th>
         </tr>
       </thead>

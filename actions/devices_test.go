@@ -24,16 +24,16 @@ func (as *ActionSuite) CreateItem() *models.Device {
 	return device
 }
 
-func (as *ActionSuite) TableChange(table string, count int, function func()) {
-	beforeCount, err := as.DB.Count(table)
-	as.NoError(err)
+// func (as *ActionSuite) TableChange(table string, count int, function func()) {
+// 	beforeCount, err := as.DB.Count(table)
+// 	as.NoError(err)
 
-	function()
+// 	function()
 
-	afterCount, err := as.DB.Count(table)
-	as.NoError(err)
-	as.Equal(count, afterCount-beforeCount)
-}
+// 	afterCount, err := as.DB.Count(table)
+// 	as.NoError(err)
+// 	as.Equal(count, afterCount-beforeCount)
+// }
 
 func (as *ActionSuite) Test_Devices_index() {
 	as.LoadFixture("lots of devices")
@@ -42,7 +42,8 @@ func (as *ActionSuite) Test_Devices_index() {
 	as.Equal(200, res.Code)
 
 	body := res.Body.String()
-	as.Contains(body, "iphone")
+	as.Contains(body, "iphone", "samsung")
+	as.NotContains(body, "xiaomi")
 }
 
 func (as *ActionSuite) Test_Devices_show() {

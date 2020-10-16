@@ -22,3 +22,7 @@ func isActive(route string, help plush.HelperContext) string {
 
 	return ""
 }
+
+func order(column string, help plush.HelperContext) {
+
+}

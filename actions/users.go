@@ -1,6 +1,7 @@
 package actions
 
 import (
+	"devices/actions/tools"
 	"devices/models"
 	"net/http"
 
@@ -22,7 +23,16 @@ func UsersIndex(c buffalo.Context) error {
 		return errors.WithStack(errors.New("no transaction found"))
 	}
 
+	title := c.Param("title")
+	sortDirection := tools.SortDirection(c.Param("direction"))
+
+	if title == "" {
+		title = "first_name"
+	}
+
 	q := tx.PaginateFromParams(c.Params())
+	q.Order(title + " " + sortDirection)
+
 	if err := q.All(users); err != nil {
 		return errors.WithStack(err)
 	}
