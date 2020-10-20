@@ -1,6 +1,7 @@
 package actions
 
 import (
+	"devices/actions/tools"
 	"devices/models"
 	"encoding/base64"
 	"fmt"
@@ -11,6 +12,10 @@ import (
 	"github.com/pkg/errors"
 )
 
+func HomeHandler(c buffalo.Context) error {
+	return c.Redirect(302, "/devices")
+}
+
 func DevicesIndex(c buffalo.Context) error {
 	tx, ok := c.Value("tx").(*pop.Connection)
 	devices := &models.Devices{}
@@ -20,7 +25,15 @@ func DevicesIndex(c buffalo.Context) error {
 	}
 
 	q := tx.PaginateFromParams(c.Params())
-	if err := q.All(devices); err != nil {
+
+	title := c.Param("column")
+	sortDirection := tools.SortDirection(c.Param("direction"))
+
+	if title == "" {
+		title = "make"
+	}
+
+	if err := q.Order(title + " " + sortDirection).All(devices); err != nil {
 		return errors.WithStack(err)
 	}
 
@@ -32,6 +45,7 @@ func DevicesIndex(c buffalo.Context) error {
 	}
 
 	c.Set("devicesTotal", devicesTotal)
+	c.Set("direction", sortDirection)
 	c.Set("pagination", q.Paginator)
 	c.Set("devices", devices)
 	return c.Render(http.StatusOK, r.HTML("devices/index.html"))

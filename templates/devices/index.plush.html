@@ -8,15 +8,39 @@
 <div class="bg-light">
   <%= partial("flash.html") %>
   <div class="container py-5">
-    <p class="text-muted my-4">
-      <b class="h3"><%= len(devicesTotal) %></b> <%= is_Plural(len(devices), "Device") %>
+    <p class="text-muted">
+      <b class="h3"><%= len(devicesTotal) %></b> <%= isPlural(len(devices), "Device") %>
     </p>
-    <table class="table border rounded bg-white">
+    <table class="table bg-white">
       <thead class="text-muted py-2"> 
         <tr>
-          <th>Device Names <i class="fas fa-sort"></i></th>
-          <th>Device Type <i class="fas fa-sort"></i></th>
-          <th>Cost <i class="fas fa-sort"></i></th>
+          <th>
+            <div class="d-flex align-items-center">
+              <span class="mr-2">Device Name</span>
+              <div class="d-flex flex-column">
+                <a class="btn-sort-up" href="<%= devicesPath({column: "make", direction: "asc"}) %>"><i class="fas fa-angle-up"></i></a>
+                <a class="btn-sort-down" href="<%= devicesPath({column: "make", direction: "desc"}) %>"><i class="fas fa-angle-down"></i></a>
+              </div>
+            </div>
+          </th>
+          <th>
+            <div class="d-flex align-items-center">
+              <span class="mr-2">Device Type</span> 
+              <div class="d-flex flex-column">
+                <a class="btn-sort-up" href="<%= devicesPath({column: "operating_system", direction: "asc"}) %>"><i class="fas fa-angle-up"></i></a>
+                <a class="btn-sort-down" href="<%= devicesPath({column: "operating_system", direction: "desc"}) %>"><i class="fas fa-angle-down"></i></a>
+              </div>
+            </div>
+          </th>
+          <th>
+            <div class="d-flex align-items-center">
+              <span class="mr-2">Cost</span> 
+              <div class="d-flex flex-column">
+                <a class="btn-sort-up" href="<%= devicesPath({column: "cost", direction: "asc"}) %>"><i class="fas fa-angle-up"></i></a>
+                <a class="btn-sort-down" href="<%= devicesPath({column: "cost", direction: "desc"}) %>"><i class="fas fa-angle-down"></i></a>
+              </div>
+            </div>
+          </th>
           <th></th>
         </tr>
       </thead>

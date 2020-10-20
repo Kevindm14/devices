@@ -1,3 +1,4 @@
-<ul class="d-flex">
-    <%= is_Active(current_path) %>
+<ul class="d-flex">  
+    <li class='item'><a class='<%= isActive("users") %>' href='<%= usersPath() %>'>Users</a></li>
+    <li class='item'><a class='<%= isActive("devices") %>' href='<%= devicesPath() %>'>Devices</a></li>
 </ul>
